@@ -33,6 +33,7 @@ SELECT
     client_id,
     page_url,
     user_agent,
+    event_name,
     timestamp,
     session_index,
     md5(client_id || '-' || session_index) AS session_id
