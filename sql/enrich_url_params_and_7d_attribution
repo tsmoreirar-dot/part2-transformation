@@ -94,6 +94,8 @@ SELECT
     a.event_id,
     a.client_id,
     a.page_url,
+    a.user_agent,
+    a.event_name,
     a.timestamp::timestamp as timestamp,
     a.session_index,
     a.session_id,
@@ -110,7 +112,7 @@ LEFT JOIN events_with_extracted_url_params b
 LEFT JOIN event_windows w
     ON w.e_id = a.event_id
 GROUP BY
-    a.event_id, a.client_id, a.page_url, a.timestamp, a.session_index, a.session_id,
+    a.event_id, a.client_id, a.page_url, a.user_agent, a.event_name,a.timestamp, a.session_index, a.session_id,
     b._kx, b.bxid, b.locale, b.utm_campaign, b.utm_content, b.utm_medium, b.utm_source,
     b.utm_term, b.gclid, b.gad_source, b.gbraid, b._gl, b.fbclid, b.msclkid,
     b.irclickid, b.irgwc, b.iradid, b.im_ref, b.oid, b.affid, b.sub1, b.sub2, b.sub3,
