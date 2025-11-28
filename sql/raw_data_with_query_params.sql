@@ -8,7 +8,7 @@ WITH kv AS (
         SELECT
             event_id, page_url,
             UNNEST(STRING_SPLIT(SPLIT_PART(page_url, '?', 2), '&')) AS pair
-        FROM raw_data_with_session_and_event_id
+        FROM enrich_session_and_event_id
     )
 ),
 events_with_extracted_url_params as(
@@ -89,7 +89,7 @@ END AS traffic_channel
 FROM kv
 GROUP BY 1,2)
 
-select a.*, "_kx", bxid, locale, utm_campaign, utm_content, utm_medium, utm_source, utm_term, gclid, gad_source, gbraid, _gl, fbclid, msclkid, irclickid, irgwc, iradid, im_ref, oid, affid, sub1, sub2, sub3, clickid, sharedid, sfdr_ptcid, sfdr_hash, amp_device_id, traffic_channel
- from raw_data_with_session_and_event_id a
+select a.event_id, a.client_id, a.page_url, a.timestamp::timestamp, a.session_index, a.session_id, "_kx", bxid, locale, utm_campaign, utm_content, utm_medium, utm_source, utm_term, gclid, gad_source, gbraid, _gl, fbclid, msclkid, irclickid, irgwc, iradid, im_ref, oid, affid, sub1, sub2, sub3, clickid, sharedid, sfdr_ptcid, sfdr_hash, amp_device_id, traffic_channel
+ from enrich_session_and_event_id a
 left join events_with_extracted_url_params b on a.event_id = b.event_id
 ;
