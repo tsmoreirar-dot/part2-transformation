@@ -32,6 +32,7 @@ SELECT
     uuid() as event_id,
     client_id,
     page_url,
+    user_agent,
     timestamp,
     session_index,
     md5(client_id || '-' || session_index) AS session_id
