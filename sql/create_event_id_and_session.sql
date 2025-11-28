@@ -1,3 +1,4 @@
+create or replace table enrich_session_and_event_id as (
 WITH ordered AS (
     SELECT
         *,
@@ -36,4 +37,4 @@ SELECT
     md5(client_id || '-' || session_index) AS session_id
 FROM session_groups
 --where client_id = '1740268999-k1PQxqt-fODp'
-ORDER BY client_id, timestamp::TIMESTAMP asc, session_id asc;
+ORDER BY client_id, timestamp::TIMESTAMP asc, session_id asc)
